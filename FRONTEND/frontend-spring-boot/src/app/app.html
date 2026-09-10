@@ -1,0 +1,22 @@
+<button (click)="cargarProductos()">cargar productos</button>
+<table>
+  <thead>
+    <tr>
+      <td>id</td>
+      <td>nombre</td>
+      <td>categoria</td>
+      <td>stock</td>
+    </tr>
+  </thead>
+  <tbody>
+    @for(producto of productos; track producto.id){
+      <tr>
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>{{producto.stock }}</td>
+      </tr>
+    }
+    
+  </tbody>
+</table>

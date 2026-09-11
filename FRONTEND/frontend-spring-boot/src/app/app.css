@@ -1,0 +1,128 @@
+/* NAVBAR */
+
+.navbar {
+  background-color: #1f2937;
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 30px;
+
+  margin-bottom: 30px;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.navbar-botones {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* CONTENEDOR */
+
+.contenedor {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: auto;
+}
+
+
+/* FORMULARIOS */
+
+.formulario {
+  background-color: #f3f4f6;
+
+  padding: 20px;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+}
+
+.formulario h3 {
+  margin-top: 0;
+}
+
+
+/* INPUTS */
+
+input,
+select {
+  padding: 8px;
+
+  margin: 5px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+}
+
+
+/* BOTONES */
+
+button {
+  padding: 8px 12px;
+
+  margin: 4px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background-color: #2563eb;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+
+/* TABLAS */
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 15px;
+
+  background-color: white;
+}
+
+thead {
+  background-color: #1f2937;
+
+  color: white;
+}
+
+td {
+  padding: 12px;
+
+  border: 1px solid #ddd;
+
+  text-align: center;
+}
+
+
+
+td button {
+  font-size: 13px;
+}
+
+h2 {
+  color: #1f2937;
+}
+
+h3 {
+  color: #374151;
+}

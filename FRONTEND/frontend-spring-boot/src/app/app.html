@@ -1,119 +1,467 @@
-<h2>Agregar producto</h2>
-<input type="text" [(ngModel)]="productoNuevo.nombre" placeholder="Nombre">
+<!-- ================= NAVBAR ================= -->
 
-<input type="text" [(ngModel)]="productoNuevo.categoria" placeholder="Categoría">
+<nav class="navbar">
 
-<input type="number" [(ngModel)]="productoNuevo.stock" placeholder="Stock">
-<button (click)="crearProducto(productoNuevo)">Agregar Producto</button>
+  <h2>Sistema de Pedidos</h2>
 
+  <div class="navbar-botones">
 
+    <button (click)="mostrarProductos()">
+      Productos
+    </button>
 
+    <button (click)="mostrarPedidos()">
+      Pedidos
+    </button>
 
+  </div>
 
-<br><br>
-<button (click)="cargarProductos()">cargar productos</button>
-<br><br>
-<h5>Productos registrados</h5>
-<table>
-  <thead>
-    <tr>
-      <td>ID</td>
-      <td>Nombre</td>
-      <td>Categoria</td>
-      <td>Stock</td>
-      <td>Accion</td>
-    </tr>
-  </thead>
-  <tbody>
-    @for(producto of productos; track producto.id; let i = $index){
-      <tr>
-        <td>{{ i + 1 }}</td>
-        <td>
-          @if(productoEditado === producto.id){
-            <input type="text" [(ngModel)]="producto.nombre">
-          }@else{
-            {{ producto.nombre }}
-          }
-        </td>
-        <td>
-          @if(productoEditado === producto.id){
-            <input type="text" [(ngModel)]="producto.categoria">
-          }@else{
-            {{ producto.categoria }}
-          }
-        </td>
-        <td>
-          @if(productoEditado === producto.id){
-            <input type="number" [(ngModel)]="producto.stock">
-          }@else{
-            {{producto.stock }}
-          }
-        </td>
-        <td> 
-          <button (click)="eliminarProducto(producto.id)">Eliminar</button>
-          @if(productoEditado === producto.id){
-            <button (click)="actualizarProducto(producto.id, producto)">Guardar</button>
-          }@else{
-            <button (click)="productoEditado = producto.id">Editar</button>
-          }
-        </td>
-      </tr>
-    }
-    
-  </tbody>
-</table>
-
-<hr>
-<!--FORMULARIO PEDIDOS-->
-<h2>Agregar pedido</h2>
-
-<input type="text" [(ngModel)]="pedidoNuevo.cliente" placeholder="Cliente">
-<input type="number" [(ngModel)]="pedidoNuevo.productoId" placeholder="ID del producto">
-<input type="number" [(ngModel)]="pedidoNuevo.cantidad" placeholder="Cantidad">
-
-<select [(ngModel)]="pedidoNuevo.prioridad">
-  <option value="BAJA">Baja</option>
-  <option value="MEDIA">Media</option>
-  <option value="ALTA">Alta</option>
-  <option value="URGENTE">Urgente</option>
-</select>
-
-<button (click)="crearPedido(pedidoNuevo)">Agregar pedido</button>
+</nav>
 
 
-<br><br>
+<!-- ================= PRODUCTOS ================= -->
 
-<button (click)="cargarPedidos()">Cargar pedidos</button>
+@if(seccion === 'productos') {
 
-<br><br>
+  <div class="contenedor">
 
-<h5>Pedidos registrados</h5>
-<table>
-  <thead>
-    <tr>
-      <td>ID</td>
-      <td>Cliente</td>
-      <td>Producto ID</td>
-      <td>Cantidad</td>
-      <td>Prioridad</td>
-      <td>Estado</td>
-      <td>Acción</td>
-    </tr>
-  </thead>
-  <tbody>
-    @for(pedido of pedidos; track pedido.id; let i = $index) {
-      <tr>
-        <td>{{ i + 1 }}</td>
-        <td>{{ pedido.cliente }}</td>
-        <td>{{ pedido.productoId }}</td>
-        <td>{{ pedido.cantidad }}</td>
-        <td>{{ pedido.prioridad }}</td>
-        <td>{{ pedido.estado }}</td>
-        <td>
-          <button (click)="eliminarPedido(pedido.id)">Eliminar</button>
-          <button>Editar</button>
-        </td>
-      </tr>
-    }
-  </tbody>
-</table>
+    <h2>Gestión de Productos</h2>
+
+    <div class="formulario">
+
+      <h3>Agregar producto</h3>
+
+      <input
+        type="text"
+        [(ngModel)]="productoNuevo.nombre"
+        placeholder="Nombre"
+      >
+
+      <input
+        type="text"
+        [(ngModel)]="productoNuevo.categoria"
+        placeholder="Categoría"
+      >
+
+      <input
+        type="number"
+        [(ngModel)]="productoNuevo.stock"
+        placeholder="Stock"
+      >
+
+      <button (click)="crearProducto(productoNuevo)">
+        Agregar Producto
+      </button>
+
+    </div>
+
+
+    <br>
+
+    <button (click)="cargarProductos()">
+      Cargar productos
+    </button>
+
+
+    <h3>Productos registrados</h3>
+
+    <table>
+
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Categoría</td>
+          <td>Stock</td>
+          <td>Acción</td>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for(producto of productos; track producto.id; let i = $index) {
+
+          <tr>
+
+            <td>
+              {{ i + 1 }}
+            </td>
+
+            <td>
+
+              @if(productoEditado === producto.id) {
+
+                <input
+                  type="text"
+                  [(ngModel)]="producto.nombre"
+                >
+
+              } @else {
+
+                {{ producto.nombre }}
+
+              }
+
+            </td>
+
+            <td>
+
+              @if(productoEditado === producto.id) {
+
+                <input
+                  type="text"
+                  [(ngModel)]="producto.categoria"
+                >
+
+              } @else {
+
+                {{ producto.categoria }}
+
+              }
+
+            </td>
+
+            <td>
+
+              @if(productoEditado === producto.id) {
+
+                <input
+                  type="number"
+                  [(ngModel)]="producto.stock"
+                >
+
+              } @else {
+
+                {{ producto.stock }}
+
+              }
+
+            </td>
+
+            <td>
+
+              <button
+                (click)="eliminarProducto(producto.id)">
+                Eliminar
+              </button>
+
+
+              @if(productoEditado === producto.id) {
+
+                <button
+                  (click)="actualizarProducto(producto.id, producto)">
+                  Guardar
+                </button>
+
+                <button
+                  (click)="productoEditado = null">
+                  Cancelar
+                </button>
+
+              } @else {
+
+                <button
+                  (click)="productoEditado = producto.id">
+                  Editar
+                </button>
+
+              }
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+}
+
+
+<!-- ================= PEDIDOS ================= -->
+
+@if(seccion === 'pedidos') {
+
+  <div class="contenedor">
+
+    <h2>Gestión de Pedidos</h2>
+
+
+    <!-- FORMULARIO PEDIDOS -->
+
+    <div class="formulario">
+
+      <h3>Agregar pedido</h3>
+
+      <input
+        type="text"
+        [(ngModel)]="pedidoNuevo.cliente"
+        placeholder="Cliente"
+      >
+
+      <input
+        type="number"
+        [(ngModel)]="pedidoNuevo.productoId"
+        placeholder="ID del producto"
+      >
+
+      <input
+        type="number"
+        [(ngModel)]="pedidoNuevo.cantidad"
+        placeholder="Cantidad"
+      >
+
+
+      <select [(ngModel)]="pedidoNuevo.prioridad">
+
+        <option value="BAJA">
+          Baja
+        </option>
+
+        <option value="MEDIA">
+          Media
+        </option>
+
+        <option value="ALTA">
+          Alta
+        </option>
+
+        <option value="URGENTE">
+          Urgente
+        </option>
+
+      </select>
+
+
+      <button (click)="crearPedido(pedidoNuevo)">
+        Agregar pedido
+      </button>
+
+    </div>
+
+
+    <br>
+
+    <button (click)="cargarPedidos()">
+      Cargar pedidos
+    </button>
+
+
+    <h3>Pedidos registrados</h3>
+
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <td>ID</td>
+          <td>Cliente</td>
+          <td>Producto ID</td>
+          <td>Cantidad</td>
+          <td>Prioridad</td>
+          <td>Estado</td>
+          <td>Acción</td>
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        @for(pedido of pedidos; track pedido.id; let i = $index) {
+
+          <tr>
+
+            <td>
+              {{ i + 1 }}
+            </td>
+
+
+            <!-- CLIENTE -->
+
+            <td>
+
+              @if(pedidoEditado === pedido.id) {
+
+                <input
+                  type="text"
+                  [(ngModel)]="pedido.cliente"
+                >
+
+              } @else {
+
+                {{ pedido.cliente }}
+
+              }
+
+            </td>
+
+
+            <!-- PRODUCTO -->
+
+            <td>
+
+              @if(pedidoEditado === pedido.id) {
+
+                <input
+                  type="number"
+                  [(ngModel)]="pedido.productoId"
+                >
+
+              } @else {
+
+                {{ pedido.productoId }}
+
+              }
+
+            </td>
+
+
+            <!-- CANTIDAD -->
+
+            <td>
+
+              @if(pedidoEditado === pedido.id) {
+
+                <input
+                  type="number"
+                  [(ngModel)]="pedido.cantidad"
+                >
+
+              } @else {
+
+                {{ pedido.cantidad }}
+
+              }
+
+            </td>
+
+
+            <!-- PRIORIDAD -->
+
+            <td>
+
+              @if(pedidoEditado === pedido.id) {
+
+                <select [(ngModel)]="pedido.prioridad">
+
+                  <option value="BAJA">
+                    Baja
+                  </option>
+
+                  <option value="MEDIA">
+                    Media
+                  </option>
+
+                  <option value="ALTA">
+                    Alta
+                  </option>
+
+                  <option value="URGENTE">
+                    Urgente
+                  </option>
+
+                </select>
+
+              } @else {
+
+                {{ pedido.prioridad }}
+
+              }
+
+            </td>
+
+
+            <!-- ESTADO -->
+
+            <td>
+              {{ pedido.estado }}
+            </td>
+
+
+            <!-- ACCIONES -->
+
+            <td>
+
+              @if(pedidoEditado === pedido.id) {
+
+                <button
+                  (click)="actualizarPedido(pedido.id, pedido)">
+                  Guardar
+                </button>
+
+                <button
+                  (click)="pedidoEditado = null">
+                  Cancelar edición
+                </button>
+
+              } @else {
+
+                @if(pedido.estado === 'PENDIENTE') {
+
+                  <button
+                    (click)="pedidoEditado = pedido.id">
+                    Editar
+                  </button>
+
+                }
+
+              }
+
+
+              @if(pedido.estado === 'PENDIENTE') {
+
+                <button
+                  (click)="confirmarPedido(pedido.id)">
+                  Confirmar
+                </button>
+
+              }
+
+
+              @if(
+                pedido.estado === 'PENDIENTE' ||
+                pedido.estado === 'CONFIRMADO'
+              ) {
+
+                <button
+                  (click)="cancelarPedido(pedido.id)">
+                  Cancelar
+                </button>
+
+              }
+
+
+              @if(pedido.estado === 'CONFIRMADO') {
+
+                <button
+                  (click)="despacharPedido(pedido.id)">
+                  Despachar
+                </button>
+
+              }
+
+
+              <button
+                (click)="eliminarPedido(pedido.id)">
+                Eliminar
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+}

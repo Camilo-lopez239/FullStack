@@ -22,6 +22,8 @@ export class App implements OnInit{
   pedidos: Pedido[] = [];
   productos: Producto[] = [];
   productoEditado: number | null =null;
+  pedidoEditado:number | null = null;
+  seccion: string = 'productos';
 
   pedidoNuevo: Pedido = {
   id: 0,
@@ -38,6 +40,13 @@ export class App implements OnInit{
     nombre: '',
     categoria: '',
     stock: 0
+  }
+  mostrarProductos(): void {
+    this.seccion = 'productos';
+  }
+
+  mostrarPedidos(): void {
+    this.seccion = 'pedidos';
   }
   ngOnInit(){
     console.log("Constructor ejecutado");

@@ -4,5 +4,5 @@ export interface Pedido {
     productoId: number,
     cantidad: number,
     prioridad: 'BAJA' | 'MEDIA' | 'ALTA' | 'URGENTE';
-    estado: 'PENDIENTE' | 'CONFIRMADO' | 'DESpACHADO' | 'CANCELADO';
+    estado: 'PENDIENTE' | 'CONFIRMADO' | 'DESPACHADO' | 'CANCELADO';
 }

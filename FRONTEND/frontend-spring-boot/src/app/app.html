@@ -1,22 +1,119 @@
+<h2>Agregar producto</h2>
+<input type="text" [(ngModel)]="productoNuevo.nombre" placeholder="Nombre">
+
+<input type="text" [(ngModel)]="productoNuevo.categoria" placeholder="Categoría">
+
+<input type="number" [(ngModel)]="productoNuevo.stock" placeholder="Stock">
+<button (click)="crearProducto(productoNuevo)">Agregar Producto</button>
+
+
+
+
+
+<br><br>
 <button (click)="cargarProductos()">cargar productos</button>
+<br><br>
+<h5>Productos registrados</h5>
 <table>
   <thead>
     <tr>
-      <td>id</td>
-      <td>nombre</td>
-      <td>categoria</td>
-      <td>stock</td>
+      <td>ID</td>
+      <td>Nombre</td>
+      <td>Categoria</td>
+      <td>Stock</td>
+      <td>Accion</td>
     </tr>
   </thead>
   <tbody>
-    @for(producto of productos; track producto.id){
+    @for(producto of productos; track producto.id; let i = $index){
       <tr>
-        <td>{{ producto.id }}</td>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.categoria }}</td>
-        <td>{{producto.stock }}</td>
+        <td>{{ i + 1 }}</td>
+        <td>
+          @if(productoEditado === producto.id){
+            <input type="text" [(ngModel)]="producto.nombre">
+          }@else{
+            {{ producto.nombre }}
+          }
+        </td>
+        <td>
+          @if(productoEditado === producto.id){
+            <input type="text" [(ngModel)]="producto.categoria">
+          }@else{
+            {{ producto.categoria }}
+          }
+        </td>
+        <td>
+          @if(productoEditado === producto.id){
+            <input type="number" [(ngModel)]="producto.stock">
+          }@else{
+            {{producto.stock }}
+          }
+        </td>
+        <td> 
+          <button (click)="eliminarProducto(producto.id)">Eliminar</button>
+          @if(productoEditado === producto.id){
+            <button (click)="actualizarProducto(producto.id, producto)">Guardar</button>
+          }@else{
+            <button (click)="productoEditado = producto.id">Editar</button>
+          }
+        </td>
       </tr>
     }
     
+  </tbody>
+</table>
+
+<hr>
+<!--FORMULARIO PEDIDOS-->
+<h2>Agregar pedido</h2>
+
+<input type="text" [(ngModel)]="pedidoNuevo.cliente" placeholder="Cliente">
+<input type="number" [(ngModel)]="pedidoNuevo.productoId" placeholder="ID del producto">
+<input type="number" [(ngModel)]="pedidoNuevo.cantidad" placeholder="Cantidad">
+
+<select [(ngModel)]="pedidoNuevo.prioridad">
+  <option value="BAJA">Baja</option>
+  <option value="MEDIA">Media</option>
+  <option value="ALTA">Alta</option>
+  <option value="URGENTE">Urgente</option>
+</select>
+
+<button (click)="crearPedido(pedidoNuevo)">Agregar pedido</button>
+
+
+<br><br>
+
+<button (click)="cargarPedidos()">Cargar pedidos</button>
+
+<br><br>
+
+<h5>Pedidos registrados</h5>
+<table>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Cliente</td>
+      <td>Producto ID</td>
+      <td>Cantidad</td>
+      <td>Prioridad</td>
+      <td>Estado</td>
+      <td>Acción</td>
+    </tr>
+  </thead>
+  <tbody>
+    @for(pedido of pedidos; track pedido.id; let i = $index) {
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ pedido.cliente }}</td>
+        <td>{{ pedido.productoId }}</td>
+        <td>{{ pedido.cantidad }}</td>
+        <td>{{ pedido.prioridad }}</td>
+        <td>{{ pedido.estado }}</td>
+        <td>
+          <button (click)="eliminarPedido(pedido.id)">Eliminar</button>
+          <button>Editar</button>
+        </td>
+      </tr>
+    }
   </tbody>
 </table>

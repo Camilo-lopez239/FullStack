@@ -25,4 +25,26 @@ export class ProductoService {
   eliminar(id: number): Observable<void>{
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
   }
+  existe(id: number): Observable<boolean>{
+    return this.http.get<boolean>(`${this.apiUrl}/${id}/existe`)
+  }
+  buscarPorCategoria(categoria: string): Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.apiUrl}/categoria/${categoria}`)
+  }
+  buscarPorNombre(nombre: string): Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.apiUrl}/buscar`, 
+      {params:
+        {
+          nombre:nombre
+        }})
+  }
+  buscarPorStockBajo(limite: number):Observable<Producto[]>{
+    return this.http.get<Producto[]>(`${this.apiUrl}/stock-bajo`,
+      {
+        params: {
+          limite: limite
+        }
+      }
+    )
+  }
 }

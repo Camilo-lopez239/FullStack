@@ -5,15 +5,9 @@
   <h2>Sistema de Pedidos</h2>
 
   <div class="navbar-botones">
-
-    <button (click)="mostrarProductos()">
-      Productos
-    </button>
-
-    <button (click)="mostrarPedidos()">
-      Pedidos
-    </button>
-
+    <button (click)="mostrarProductos()">Productos</button>
+    <button (click)="mostrarPedidos()">Pedidos</button>
+    <button (click)="mostrarDashboard()">Dashboard</button>
   </div>
 
 </nav>
@@ -465,3 +459,37 @@
   </div>
 
 }
+
+@if(seccion === 'dashboard') {
+
+<div class="contenedor">
+
+  <h2>Dashboard</h2>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-item productos">
+      <span>Total productos: {{ totalProductos }}</span>
+    </div>
+
+  @for(item of resumenItems; track item) {
+
+    <div class="dashboard-item">
+
+      <span>
+        {{ item }}
+      </span>
+
+    </div>
+
+  }
+
+</div>
+
+  <button (click)="cargarResumenPedidos()">
+    Actualizar Dashboard
+  </button>
+
+</div>
+
+}
+`

@@ -18,6 +18,9 @@ export class App implements OnInit{
   private cdr = inject(ChangeDetectorRef);
   public productoService = inject(ProductoService);
   public pedidoService = inject(PedidoService);
+  resumenTexto: string = '';
+  resumenItems: string[] = [];
+  totalProductos = 0;
 
   pedidos: Pedido[] = [];
   productos: Producto[] = [];
@@ -358,11 +361,55 @@ export class App implements OnInit{
       }
     });
   }
+  mostrarDashboard(): void {
+    this.seccion = 'dashboard';
+    this.cargarResumenPedidos();
+    this.cargarTotalProductos();
+  }
+  cargarResumenPedidos(): void {
 
+    this.pedidoService.resumenPedidos().subscribe({
 
+      next: resumen => {
 
+        this.resumenItems = resumen.split('\n');
 
+        this.cdr.detectChanges();
 
+      },
 
+      error: error => {
+
+        console.error(error);
+
+      }
+
+    });
+
+  }
+  cargarTotalProductos(): void {
+
+    this.productoService.listar().subscribe({
+
+      next: productos => {
+
+        this.totalProductos = productos.length;
+
+        this.cdr.detectChanges();
+
+      },
+
+      error: error => {
+
+        console.error(
+          'Error obteniendo productos',
+          error
+        );
+
+      }
+
+    });
+
+  }
 
 }
